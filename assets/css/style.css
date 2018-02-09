@@ -1,7 +1,12 @@
+html {
+	overflow: auto;
+}
+
 body {
 	background-image: url("./../images/LOTRbackground.jpg");
 	font-family: 'MedievalSharp', cursive;
 	color: white;
+	overflow: auto;
 }
 .navbar-header {
 	float:none;
@@ -35,7 +40,7 @@ body {
 	border-radius: 5px 17px;
 }
 
-.hero {
+.hero, .character {
 	margin: 10px;
 	display: inline-block;
 }
@@ -51,4 +56,21 @@ body {
 	background-color: #444;
 	padding-left: 10px;
 	padding-right: 10px;
+	border-radius: 3px 10px;
 }
+
+.hp {
+		position: absolute;
+		bottom: 5px;
+		right: 20px;
+		background-color: #444;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 3px 10px;
+	}
+
+	#updateArea {
+		background-color: #444;
+		padding: 10px;
+		border-radius: 5px 17px;
+	}
