@@ -34,30 +34,49 @@
 
 // Your players should be able to win and lose the game no matter what character they choose. The challenge should come from picking the right enemies, not choosing the strongest player.
 
-$(document).ready(function() {
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var frodo = {name: 'Frodo', hp: 80, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp"><h5>80</h5></div>'};
-var gollum = {name: 'Gollum', hp: 120, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp">	<h5>120</h5></div>'};
-var gandalf = {name: 'Gandalf', hp: 150, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp"><h5>150</h5></div>'};
-var sauron = {name: 'Sauron', hp: 200, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>'};
+$(document).ready(function () {
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var frodo = { name: 'Frodo', hp: 80, attackPower: 5, counterPower: 10, loot: 'The One Ring', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp"><h5>80</h5></div>' };
+	var gollum = { name: 'Gollum', hp: 120, attackPower: 5, counterPower: 10, loot: 'Fish Carcass', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp">	<h5>120</h5></div>' };
+	var gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, counterPower: 10, loot: 'Wizard Hat', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp"><h5>150</h5></div>' };
+	var sauron = { name: 'Sauron', hp: 200, attackPower: 5, counterPower: 10, loot: 'The Eye of Sauron', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>' };
+	var charBool = false;
+	var enemyBool = false;
 
-function initializeGame() {
-	frodo = {name: 'Frodo', hp: 80, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp"><h5>80</h5></div>'};
-	gollum = {name: 'Gollum', hp: 120, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp">	<h5>120</h5></div>'};
-	gandalf = {name: 'Gandalf', hp: 150, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp"><h5>150</h5></div>'};
-	sauron = {name: 'Sauron', hp: 200, attackPower: 5, counterPower: 10, display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>'};
-	$('#hero1').html(frodo.display);
-	$('#hero2').html(gollum.display);
-	$('#hero3').html(gandalf.display);
-	$('#hero4').html(sauron.display);
-}
+	function initializeGame() {
+		frodo = { name: 'Frodo', hp: 80, attackPower: 5, counterPower: 10, loot: 'The One Ring', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp"><h5>80</h5></div>' };
+		gollum = { name: 'Gollum', hp: 120, attackPower: 5, counterPower: 10, loot: 'Fish Carcass', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp">	<h5>120</h5></div>' };
+		gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, counterPower: 10, loot: 'Wizard Hat', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp"><h5>150</h5></div>' };
+		sauron = { name: 'Sauron', hp: 200, attackPower: 5, counterPower: 10, loot: 'The Eye of Sauron', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>' };
+		$('#hero1').html(frodo.display);
+		$('#hero2').html(gollum.display);
+		$('#hero3').html(gandalf.display);
+		$('#hero4').html(sauron.display);
+		charBool = false;
+		enemyBool = false;
+	}
 
-$('.character').on('click', function() {
-	console.log(this.id);
-	$('#playerHero').append(this);
-	$(this).attr('class','col-md-2 hero');
-	$('#enemiesAvailable').append($('.character'));
-})
+	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
+	$('.character').on('click', function () {
+		if (charBool === false) {
+			console.log(this.id);
+			$('#select').hide();
+			$('#playerHero').append(this);
+			charBool = true;
+			$(this).attr('class', 'col-md-2 hero');
+			$('#enemiesAvailable').append($('.character'));
+		}
+		else if (enemyBool === false) {
+			enemyBool = true;
+			$(this).attr('class', 'col-md-2 enemy');
+			$('#defenderArea').append(this);
+		}
+	});
 
-initializeGame();
+	// ATTACK FUNCTION - WHEN CLICKED, REMOVES ATTACK VALUE FROM ENEMY HP, REMOVES COUNTERATTACK FROM HERO HP, ADDS TO HERO ATTACK, IF ENEMY SLAIN LOGIC
+	$('#attack').on('click', function () {
+
+	});
+
+	initializeGame();
 });
