@@ -50,7 +50,7 @@ $(document).ready(function () {
 		frodo = { name: 'Frodo', hp: 80, attackPower: 5, attackGrow: 10, counterPower: 10, loot: '<img class="loot" src="assets/images/the-one-ring.png" alt="Ring">', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp"><h5>80</h5></div>' };
 		gollum = { name: 'Gollum', hp: 120, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/deadfish.jpg_c200" alt="Fish">', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp">	<h5>120</h5></div>' };
 		gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/witch-hat.jpg" alt="Wizard Hat">', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp"><h5>150</h5></div>' };
-		sauron = { name: 'Sauron', hp: 200, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>' };
+		sauron = { name: 'Sauron', hp: 200, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp"><h5>200</h5></div>'};
 		$('#hero1').html(frodo.display);
 		$('#hero2').html(gollum.display);
 		$('#hero3').html(gandalf.display);
@@ -59,6 +59,7 @@ $(document).ready(function () {
 		enemyBool = false;
 		myHero = '';
 		myEnemy = '';
+		// $('.enemy').attr("class","col-md-2");
 	}
 
 	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
@@ -125,7 +126,7 @@ $(document).ready(function () {
 
 	// ATTACK FUNCTION - WHEN CLICKED, REMOVES ATTACK VALUE FROM ENEMY HP, REMOVES COUNTERATTACK FROM HERO HP, ADDS TO HERO ATTACK, IF ENEMY SLAIN LOGIC
 	$('#attack').on('click', function () {
-		if (characterArray.length !== 0) {
+		if (characterArray.length !== 0 && myHero.hp > 0) {
 		console.log(myHero);
 		myHero.hp = myHero.hp - myEnemy.counterPower;
 		// $('.hp').text(myHero.hp);
@@ -141,6 +142,10 @@ $(document).ready(function () {
 			console.log(characterArray);
 		}
 
+	}
+	else if (characterArray.length !== 0 && myHero.hp <= 0) {
+		alert('You lose!');
+		initializeGame();
 	}
 	else {
 		alert('You win!');
