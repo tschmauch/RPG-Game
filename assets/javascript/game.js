@@ -142,7 +142,10 @@ $(document).ready(function () {
 		}
 
 	}
-	else {alert('You win!')};
+	else {
+		alert('You win!');
+		initializeGame();
+	};
 	});
 	initializeGame();
 })
