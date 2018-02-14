@@ -69,7 +69,7 @@ body {
 		border-radius: 3px 10px;
 	}
 
-	#updateArea {
+	#score, #updateArea {
 		background-color: #444;
 		padding: 10px;
 		border-radius: 5px 17px;
