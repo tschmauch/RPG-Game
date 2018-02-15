@@ -61,10 +61,10 @@ $(document).ready(function () {
 
 	function initializeGame() {
 		characterArray = [frodo, gollum, gandalf, sauron];
-		frodo = { name: 'Frodo', hp: 80, attackPower: 5, attackGrow: 10, counterPower: 10, loot: '<img class="loot" src="assets/images/the-one-ring.png" alt="Ring">', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp" id="hp1"><h5>80</h5></div>' };
-		gollum = { name: 'Gollum', hp: 120, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/deadfish.jpg_c200" alt="Fish">', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp" id="hp2"><h5>120</h5></div>' };
-		gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/witch-hat.jpg" alt="Wizard Hat">', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp" id="hp3"><h5>150</h5></div>' };
-		sauron = { name: 'Sauron', hp: 200, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp" id="hp4"><h5>200</h5></div>' };
+		frodo = { name: 'Frodo', hp: 80, attackPower: 5, attackGrow: 15, counterPower: 5, loot: '<img class="loot" src="assets/images/the-one-ring.png" alt="Ring">', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp" id="hp1"><h5>80</h5></div>' };
+		gollum = { name: 'Gollum', hp: 120, attackPower: 10, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/deadfish.jpg_c200" alt="Fish">', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp" id="hp2"><h5>120</h5></div>' };
+		gandalf = { name: 'Gandalf', hp: 150, attackPower: 20, attackGrow: 8, counterPower: 20, loot: '<img class="loot" src="assets/images/witch-hat.jpg" alt="Wizard Hat">', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp" id="hp3"><h5>150</h5></div>' };
+		sauron = { name: 'Sauron', hp: 200, attackPower: 15, attackGrow: 10, counterPower: 25, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp" id="hp4"><h5>200</h5></div>' };
 		$('#hero1').html(frodo.display);
 		$('#hero2').html(gollum.display);
 		$('#hero3').html(gandalf.display);
