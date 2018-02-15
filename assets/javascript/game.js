@@ -49,6 +49,17 @@ $(document).ready(function () {
 	var lossCounter = 0;
 
 	function initializeGame() {
+		characterArray = [frodo,gollum,gandalf,sauron];
+		$('#enemiesAvailable').empty();
+		$('#playerHero').empty();
+		$('#hp1').attr('id', 'hp1');
+		$('#hp2').attr('id', 'hp2');
+		$('#hp3').attr('id', 'hp3');
+		$('#hp4').attr('id', 'hp4');
+		$('#defenderArea').empty();
+		$('.col-md-2').attr('class', 'col-md-2 character');
+		$('.enemy').show();
+		$('#select').show();
 		frodo = { name: 'Frodo', hp: 80, attackPower: 5, attackGrow: 10, counterPower: 10, loot: '<img class="loot" src="assets/images/the-one-ring.png" alt="Ring">', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp" id="hp1"><h5>80</h5></div>' };
 		gollum = { name: 'Gollum', hp: 120, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/deadfish.jpg_c200" alt="Fish">', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp" id="hp2">	<h5>120</h5></div>' };
 		gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/witch-hat.jpg" alt="Wizard Hat">', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp" id="hp3"><h5>150</h5></div>' };
@@ -68,7 +79,6 @@ $(document).ready(function () {
 	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
 	$('.character').on('click', function () {
 		if (charBool === false) {
-			console.log(this);
 			$('#select').hide();
 			$('#playerHero').append(this);
 			charBool = true;
@@ -78,22 +88,22 @@ $(document).ready(function () {
 				case hero1:
 					myHero = frodo;
 					characterArray.splice(0, 1);
-					$('#hp1').attr('id', 'heroHP');
+					$('#hp1').attr('id', 'hp1 heroHP');
 					break;
 				case hero2:
 					myHero = gollum;
 					characterArray.splice(1, 1);
-					$('#hp2').attr('id', 'heroHP');
+					$('#hp2').attr('id', 'hp2 heroHP');
 					break;
 				case hero3:
 					myHero = gandalf;
 					characterArray.splice(2, 1);
-					$('#hp3').attr('id', 'heroHP');
+					$('#hp3').attr('id', 'hp3 heroHP');
 					break;
 				case hero4:
 					myHero = sauron;
 					characterArray.splice(3, 1);
-					$('#hp4').attr('id', 'heroHP');
+					$('#hp4').attr('id', 'hp4 heroHP');
 					break;
 			}
 			console.log(characterArray);
@@ -109,25 +119,25 @@ $(document).ready(function () {
 					myEnemy = frodo;
 					var indexFrodo = characterArray.indexOf(frodo);
 					characterArray.splice(indexFrodo, 1);
-					$('#hp1').attr('id', 'enemyHP');
+					$('#hp1').attr('id', 'hp1 enemyHP');
 					break;
 				case hero2:
 					myEnemy = gollum;
 					var indexGollum = characterArray.indexOf(frodo);
 					characterArray.splice(indexGollum, 1);
-					$('#hp2').attr('id', 'enemyHP');
+					$('#hp2').attr('id', 'hp2 enemyHP');
 					break;
 				case hero3:
 					myEnemy = gandalf;
 					var indexGandalf = characterArray.indexOf(frodo);
 					characterArray.splice(indexGandalf, 1);
-					$('#hp3').attr('id', 'enemyHP');
+					$('#hp3').attr('id', 'hp3 enemyHP');
 					break;
 				case hero4:
 					myEnemy = sauron;
 					var indexSauron = characterArray.indexOf(frodo);
 					characterArray.splice(indexSauron, 1);
-					$('#hp4').attr('id', 'enemyHP');
+					$('#hp4').attr('id', 'hp4 enemyHP');
 					break;
 			}
 			console.log(characterArray);
