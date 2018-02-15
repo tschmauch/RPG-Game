@@ -48,35 +48,34 @@ $(document).ready(function () {
 	var winCounter = 0;
 	var lossCounter = 0;
 
-function resetGame() {
-	$('.container').html('<div class="row"><div class="col-md-12"><h3 id="select">Select Your Hero</h3></div></div><div class="row" id="heroSelection"><div id="hero1" class="col-md-2 character"></div>	<div id="hero2" class="col-md-2 character"></div><div id="hero3" class="col-md-2 character"></div><div id="hero4" class="col-md-2 character"></div></div><div id="playerHero" class="row"><div class="col-md-12"><h3>Your Hero</h3></div></div><div id="enemiesAvailable" class="row"><div class="col-md-12"><h3>Enemies Available to Attack</h3></div></div><!-- button --><button id="attack" type="button" class="btn btn-danger">Attack!</button><div id="defenderArea" class="row"><div class="col-md-12"><h3>Opponent</h3></div></div><div class="row"><div id="updateArea" class="col-md-5">		<p>SAVE MIDDLE EARTH</p></div></div><br><br><div class="row"><div id="score" class="col-md-5"></div></div>')
-}
-
-	function initializeGame() {
-		characterArray = [frodo,gollum,gandalf,sauron];
+	function resetGame() {
+		$('.container').html('<div class="row"><div class="col-md-12"><h3 id="select">Select Your Hero</h3></div></div><div class="row" id="heroSelection"><div id="hero1" class="col-md-2 character"></div>	<div id="hero2" class="col-md-2 character"></div><div id="hero3" class="col-md-2 character"></div><div id="hero4" class="col-md-2 character"></div></div><div id="playerHero" class="row"><div class="col-md-12"><h3>Your Hero</h3></div></div><div id="enemiesAvailable" class="row"><div class="col-md-12"><h3>Enemies Available to Attack</h3></div></div><!-- button --><button id="attack" type="button" class="btn btn-danger">Attack!</button><div id="defenderArea" class="row"><div class="col-md-12"><h3>Opponent</h3></div></div><div class="row"><div id="updateArea" class="col-md-5">		<p>SAVE MIDDLE EARTH</p></div></div><br><br><div class="row"><div id="score" class="col-md-5"></div></div>');
 		$('#hp1').attr('id', 'hp1');
 		$('#hp2').attr('id', 'hp2');
 		$('#hp3').attr('id', 'hp3');
 		$('#hp4').attr('id', 'hp4');
 		$('.col-md-2').attr('class', 'col-md-2 character');
+		myHero = '';
+		myEnemy = '';
+	}
+
+	function initializeGame() {
+		characterArray = [frodo, gollum, gandalf, sauron];
 		frodo = { name: 'Frodo', hp: 80, attackPower: 5, attackGrow: 10, counterPower: 10, loot: '<img class="loot" src="assets/images/the-one-ring.png" alt="Ring">', display: '<img class="heroimg" src="assets/images/frodo.jpg_c200" alt="Frodo"><div class="text-block"><h5>Frodo</h5></div><div class="hp" id="hp1"><h5>80</h5></div>' };
 		gollum = { name: 'Gollum', hp: 120, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/deadfish.jpg_c200" alt="Fish">', display: '<img class="heroimg" src="assets/images/gollum.png" alt="Gollum"><div class="text-block"><h5>Gollum</h5></div><div class="hp" id="hp2"><h5>120</h5></div>' };
 		gandalf = { name: 'Gandalf', hp: 150, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/witch-hat.jpg" alt="Wizard Hat">', display: '<img class="heroimg" src="assets/images/gandalf.jpg" alt="Gandalf"><div class="text-block">	<h5>Gandalf</h5></div><div class="hp" id="hp3"><h5>150</h5></div>' };
-		sauron = { name: 'Sauron', hp: 200, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp" id="hp4"><h5>200</h5></div>'};
+		sauron = { name: 'Sauron', hp: 200, attackPower: 5, attackGrow: 5, counterPower: 10, loot: '<img class="loot" src="assets/images/EyeSauron.jpg" alt="Eye">', display: '<img class="heroimg" src="assets/images/sauron.jpg" alt="Sauron"><div class="text-block"><h5>Sauron</h5></div><div class="hp" id="hp4"><h5>200</h5></div>' };
 		$('#hero1').html(frodo.display);
 		$('#hero2').html(gollum.display);
 		$('#hero3').html(gandalf.display);
 		$('#hero4').html(sauron.display);
 		charBool = false;
 		enemyBool = false;
-		myHero = '';
-		myEnemy = '';
 		$('#score').text('Wins: ' + winCounter + '   Losses: ' + lossCounter);
-		// $('.enemy').attr("class","col-md-2");
 	}
 
 	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
-	$('.character').on('click', function () {
+	$('body').on('click', '.character', function () {
 		if (charBool === false) {
 			$('#select').hide();
 			$('#playerHero').append(this);
@@ -105,8 +104,6 @@ function resetGame() {
 					$('#hp4').attr('id', 'hp4 heroHP');
 					break;
 			}
-			console.log(characterArray);
-
 		}
 		else if (enemyBool === false) {
 			enemyBool = true;
@@ -143,38 +140,38 @@ function resetGame() {
 	});
 
 	// ATTACK FUNCTION - WHEN CLICKED, REMOVES ATTACK VALUE FROM ENEMY HP, REMOVES COUNTERATTACK FROM HERO HP, ADDS TO HERO ATTACK, IF ENEMY SLAIN LOGIC
-	$('#attack').on('click', function () {
+	$('body').on('click', '#attack', function () {
 		if (characterArray.length !== 0 && myHero.hp > 0) {
 			myHero.hp = myHero.hp - myEnemy.counterPower;
 			console.log(myHero.hp);
-		$('#heroHP').text(myHero.hp);
-		myEnemy.hp = myEnemy.hp - myHero.attackPower;
-		$('#enemyHP').text(myEnemy.hp);
-		myHero.attackPower = myHero.attackPower + myHero.attackGrow;
-		console.log(myHero.attackPower);
-		$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
-	
-		if (myEnemy.hp <= 0) {
-			$('#updateArea').text('You\'ve slain ' + myEnemy.name + '!');
-			$('.enemy').hide();
-			enemyBool = false;
-			myEnemy = '';
-			console.log(characterArray);
-		}
+			$('#heroHP').text(myHero.hp);
+			myEnemy.hp = myEnemy.hp - myHero.attackPower;
+			$('#enemyHP').text(myEnemy.hp);
+			myHero.attackPower = myHero.attackPower + myHero.attackGrow;
+			console.log(myHero.attackPower);
+			$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
 
-	}
-	else if (characterArray.length !== 0 && myHero.hp <= 0) {
-		lossCounter ++;
-		alert('You lose!');
-		resetGame();
-		initializeGame();
-	}
-	else {
-		winCounter++;
-		alert('You win!');
-		resetGame();
-		initializeGame();
-	};
+			if (myEnemy.hp <= 0) {
+				$('#updateArea').text('You\'ve slain ' + myEnemy.name + '!');
+				$('.enemy').hide();
+				enemyBool = false;
+				myEnemy = '';
+				console.log(characterArray);
+			}
+
+		}
+		else if (characterArray.length !== 0 && myHero.hp <= 0) {
+			lossCounter++;
+			alert('You lose!');
+			resetGame();
+			initializeGame();
+		}
+		else {
+			winCounter++;
+			alert('You win!');
+			resetGame();
+			initializeGame();
+		};
 	});
 	initializeGame();
 })
