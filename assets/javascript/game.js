@@ -74,6 +74,11 @@ $(document).ready(function () {
 		$('#score').text('Wins: ' + winCounter + '   Losses: ' + lossCounter);
 	}
 
+	function updateHP() {
+		$('#heroHP').text(myHero.hp);
+		$('#enemyHP').text(myEnemy.hp);
+	}
+
 	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
 	$('body').on('click', '.character', function () {
 		if (charBool === false) {
@@ -141,25 +146,22 @@ $(document).ready(function () {
 
 	// ATTACK FUNCTION - WHEN CLICKED, REMOVES ATTACK VALUE FROM ENEMY HP, REMOVES COUNTERATTACK FROM HERO HP, ADDS TO HERO ATTACK, IF ENEMY SLAIN LOGIC
 	$('body').on('click', '#attack', function () {
-		if (characterArray.length !== 0 && myHero.hp > 0) {
+		if (characterArray.length !== 0 && myHero.hp > 0 && myEnemy.hp > 0) {
 			myHero.hp = myHero.hp - myEnemy.counterPower;
 			console.log(myHero.hp);
-			$('#heroHP').text(myHero.hp);
 			myEnemy.hp = myEnemy.hp - myHero.attackPower;
-			$('#enemyHP').text(myEnemy.hp);
 			myHero.attackPower = myHero.attackPower + myHero.attackGrow;
 			console.log(myHero.attackPower);
+			updateHP();
 			$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
-
-			if (myEnemy.hp <= 0) {
+		}
+			else if (characterArray.length !== 0 && myEnemy.hp <= 0) {
 				$('#updateArea').text('You\'ve slain ' + myEnemy.name + '!');
 				$('.enemy').hide();
 				enemyBool = false;
 				myEnemy = '';
 				console.log(characterArray);
 			}
-
-		}
 		else if (characterArray.length !== 0 && myHero.hp <= 0) {
 			lossCounter++;
 			alert('You lose!');
