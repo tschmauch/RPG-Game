@@ -50,10 +50,10 @@ $(document).ready(function () {
 
 	function resetGame() {
 		$('.container').html('<div class="row"><div class="col-md-12"><h3 id="select">Select Your Hero</h3></div></div><div class="row" id="heroSelection"><div id="hero1" class="col-md-2 character"></div>	<div id="hero2" class="col-md-2 character"></div><div id="hero3" class="col-md-2 character"></div><div id="hero4" class="col-md-2 character"></div></div><div id="playerHero" class="row"><div class="col-md-12"><h3>Your Hero</h3></div></div><div id="enemiesAvailable" class="row"><div class="col-md-12"><h3>Enemies Available to Attack</h3></div></div><!-- button --><button id="attack" type="button" class="btn btn-danger">Attack!</button><div id="defenderArea" class="row"><div class="col-md-12"><h3>Opponent</h3></div></div><div class="row"><div id="updateArea" class="col-md-5">		<p>SAVE MIDDLE EARTH</p></div></div><br><br><div class="row"><div id="score" class="col-md-5"></div></div>');
-		$('#hp1').attr('id', 'hp1');
-		$('#hp2').attr('id', 'hp2');
-		$('#hp3').attr('id', 'hp3');
-		$('#hp4').attr('id', 'hp4');
+		$('#hp1').attr('class', 'hp');
+		$('#hp2').attr('class', 'hp');
+		$('#hp3').attr('class', 'hp');
+		$('#hp4').attr('class', 'hp');
 		$('.col-md-2').attr('class', 'col-md-2 character');
 		myHero = '';
 		myEnemy = '';
@@ -75,8 +75,9 @@ $(document).ready(function () {
 	}
 
 	function updateHP() {
-		$('#heroHP').text(myHero.hp);
-		$('#enemyHP').text(myEnemy.hp);
+		$('.heroHP').text(myHero.hp);
+		$('.enemyHP').text(myEnemy.hp);
+		console.log('inside updateHP fx', myHero.hp);
 	}
 
 	// WHEN YOU CLICK ON A CHARACTER, IF FIRST SELECTION, SET AS HERO, SET ALL OTHERS AS AVAILABLE ENEMIES, IF ANOTHER CLICKED SET AS CURRENT ENEMY
@@ -91,22 +92,22 @@ $(document).ready(function () {
 				case hero1:
 					myHero = frodo;
 					characterArray.splice(0, 1);
-					$('#hp1').attr('id', 'hp1 heroHP');
+					$('#hp1').attr('class', 'hp heroHP');
 					break;
 				case hero2:
 					myHero = gollum;
 					characterArray.splice(1, 1);
-					$('#hp2').attr('id', 'hp2 heroHP');
+					$('#hp2').attr('class', 'hp heroHP');
 					break;
 				case hero3:
 					myHero = gandalf;
 					characterArray.splice(2, 1);
-					$('#hp3').attr('id', 'hp3 heroHP');
+					$('#hp3').attr('class', 'hp heroHP');
 					break;
 				case hero4:
 					myHero = sauron;
 					characterArray.splice(3, 1);
-					$('#hp4').attr('id', 'hp4 heroHP');
+					$('#hp4').attr('class', 'hp heroHP');
 					break;
 			}
 		}
@@ -120,25 +121,25 @@ $(document).ready(function () {
 					myEnemy = frodo;
 					var indexFrodo = characterArray.indexOf(frodo);
 					characterArray.splice(indexFrodo, 1);
-					$('#hp1').attr('id', 'hp1 enemyHP');
+					$('#hp1').attr('class', 'hp enemyHP');
 					break;
 				case hero2:
 					myEnemy = gollum;
 					var indexGollum = characterArray.indexOf(frodo);
 					characterArray.splice(indexGollum, 1);
-					$('#hp2').attr('id', 'hp2 enemyHP');
+					$('#hp2').attr('class', 'hp enemyHP');
 					break;
 				case hero3:
 					myEnemy = gandalf;
 					var indexGandalf = characterArray.indexOf(frodo);
 					characterArray.splice(indexGandalf, 1);
-					$('#hp3').attr('id', 'hp3 enemyHP');
+					$('#hp3').attr('class', 'hp enemyHP');
 					break;
 				case hero4:
 					myEnemy = sauron;
 					var indexSauron = characterArray.indexOf(frodo);
 					characterArray.splice(indexSauron, 1);
-					$('#hp4').attr('id', 'hp4 enemyHP');
+					$('#hp4').attr('class', 'hp enemyHP');
 					break;
 			}
 		}
@@ -154,19 +155,18 @@ $(document).ready(function () {
 			console.log(myHero.attackPower);
 			updateHP();
 			$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
-		}
-			else if (characterArray.length !== 0 && myEnemy.hp <= 0) {
+			if (characterArray.length !== 0 && myEnemy.hp <= 0) {
 				$('#updateArea').text('You\'ve slain ' + myEnemy.name + '!');
 				$('.enemy').hide();
 				enemyBool = false;
 				myEnemy = '';
-				console.log(characterArray);
 			}
-		else if (characterArray.length !== 0 && myHero.hp <= 0) {
-			lossCounter++;
-			alert('You lose!');
-			resetGame();
-			initializeGame();
+			if (characterArray.length !== 0 && myHero.hp <= 0) {
+				lossCounter++;
+				alert('You lose!');
+				resetGame();
+				initializeGame();
+			}
 		}
 		else {
 			winCounter++;
