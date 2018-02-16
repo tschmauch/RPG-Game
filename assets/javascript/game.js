@@ -150,11 +150,11 @@ $(document).ready(function () {
 		if (characterArray.length !== 0 && myHero.hp > 0 && myEnemy.hp > 0) {
 			myHero.hp = myHero.hp - myEnemy.counterPower;
 			console.log(myHero.hp);
+			$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
 			myEnemy.hp = myEnemy.hp - myHero.attackPower;
 			myHero.attackPower = myHero.attackPower + myHero.attackGrow;
 			console.log(myHero.attackPower);
 			updateHP();
-			$('#updateArea').text('You\'ve dealt ' + myHero.attackPower + ' damage to ' + myEnemy.name + '! ' + myEnemy.name + ' dealt ' + myEnemy.counterPower + ' damage to you.');
 			if (characterArray.length !== 0 && myEnemy.hp <= 0) {
 				$('#updateArea').text('You\'ve slain ' + myEnemy.name + '!');
 				$('.enemy').hide();
